@@ -4,12 +4,11 @@ const profile = {
   name: "Nehal Panchal",
   role: "AI Engineer",
   summary:
-    "AI Engineer with published IEEE research on explainable AI, hands-on expertise in LLMs and agentic systems, and a strong foundation in machine learning, deep learning, and NLP, with end-to-end delivery experience on Azure cloud platforms.",
+    "AI Engineer with published IEEE research in explainable AI and experience delivering production-grade systems, with expertise in LLMs and agentic systems, and a strong foundation in machine learning, deep learning, and NLP, with end-to-end delivery experience on Azure cloud platforms. I specialize in deploying and optimizing VLM/LLM workloads across NVIDIA GPU architectures (Turing, Ampere, and newer), and building end-to-end AI pipelines with robust evaluation for quality, latency, and reliability.",
   highlights: [
     "Published IEEE research in explainable multimodal glaucoma detection (2025).",
-    "Production delivery of LLM, OCR, and Deep Research capabilities on Azure.",
     "Strong foundation in machine learning, deep learning, and natural language processing.",
-    "Strong stack across LangChain, LangGraph, PyTorch, Transformers, and data engineering.",
+    "Built and optimized enterprise AI pipelines with measurable performance and reliability improvements.",
   ],
   socialLinks: [
     { label: "E-mail", href: "mailto:panchalnehal17@gmail.com" },
@@ -28,27 +27,39 @@ const publication = {
 
 const experience = [
   {
-    role: "Associate Software Developer",
-    company: "Infodesk India Private Limited",
-    period: "Jul 2025 - Present",
+    role: "Software Developer",
+    company: "Infodesk",
+    period: "Mar 2026 - Present",
     highlights: [
-      "Researched and benchmarked open-source models, including Gemma 3 and GPT-OSS-20B, for enterprise adoption.",
-      "Designed and implemented LLM evaluation pipelines for taxonomy classification and related enterprise tasks.",
-      "Fine-tuned OpenAI models through API-driven workflows to improve taxonomy classification quality.",
-      "Built production services for taxonomy classification, summarization, and agentic workflows, and integrated them into enterprise applications.",
-      "Developed and maintained agentic enterprise workflows using LangChain, LangGraph, OpenAI, and Azure services.",
-      "Deployed DeepSeek-OCR with vLLM as a production document-parsing service on Azure Container Apps.",
+      "Deployed DeepSeek OCR V2 using the vLLM library on GPU infrastructure for document parsing, processing 1,000+ documents per day in production.",
+      "Engineered cross-architecture GPU compatibility for DeepSeek OCR V2 converted inference pipeline to float16 with xFormers for backward compatibility on Nvidia Turing (T4), and enabled bfloat16 with Flash Attention for forward compatibility on Ampere (A100) and newer architectures.",
+      "Optimized KV cache utilization and implemented input caching for PDF page-to-image pipelines with pre-tokenized batched image inputs, improving throughput.",
+      "Contributed to the development of the Deep Research feature, enhancing existing Copilot enterprise applications and integrating AI capabilities into existing software infrastructure.",
+      "Deploying and managing AI solutions on Azure infrastructure, including Azure Container Apps, Azure Functions, and Azure App Service.",
+    ],
+  },
+  {
+    role: "Associate Software Developer",
+    company: "Infodesk",
+    period: "Jul 2025 - Feb 2026",
+    highlights: [
+      "Built and scaled a taxonomy classification pipeline, fine-tuning LLMs via the OpenAI API and implementing evaluation frameworks to monitor and maintain classification accuracy in production.",
+      "Developed a centralized summarization service integrated across multiple applications, with rate limiting and hash-encrypted API key authentication backed by PostgreSQL and Django REST Framework.",
+      "Designed and maintained enterprise AI solutions using LangChain, OpenAI, and LangGraph covering agentic workflows.",
+      "Collaborated with cross-functional teams to embed AI capabilities into existing applications.",
     ],
   },
   {
     role: "AI/ML Developer Intern",
-    company: "Infodesk India Private Limited",
+    company: "Infodesk",
     period: "Jan 2025 - Jul 2025",
     highlights: [
-      "Learned software engineering best practices and used AI tools to quickly develop solutions and accelerate productivity.",
-      "Worked across LLMs, RAG, MCP, multi-agent systems, and CI/CD-driven delivery practices.",
-      "Built distributed document extraction using Tesseract and Apache Tika sidecar architecture.",
-      "Profiled monolith vs distributed deployment performance on Azure Container Apps.",
+      "Gained hands-on experience with LLMs, RAG, MCP, multi-agent systems, CI/CD pipelines, SDLC, and core software engineering practices.",
+      "Optimized AI services to improve system performance and efficiency.",
+      "Researched and evaluated document extraction libraries, analyzing quality, cost, and performance trade-offs.",
+      "Developed a scalable document extraction tool using Tesseract for script detection and distributed Apache Tika instances via sidecar containers.",
+      "Deployed the solution on Azure Container Apps and conducted performance profiling of monolithic vs. distributed architectures.",
+      "Contributed to feature development and code optimization for an existing enterprise product.",
     ],
   },
 ];
@@ -178,15 +189,16 @@ const projects = [
 ];
 
 const certifications = {
+  "2026": ["Claude 101 - Anthropic"],
   "2024": [
     "Microsoft AI Skill Challenge - Microsoft",
-    "Azure AI Services Suite - NLP, Document Intelligence, Computer Vision",
+    "Azure AI Services Suite - Natural Language Processing, Document Intelligence, Computer Vision",
     "Google Analytics for Beginners - Google Analytics Academy",
     "IBM Enterprise-grade AI - Getting Started with Enterprise AI",
   ],
   "2023": [
     "IBM Enterprise Data Science - Professional Certification",
-    "Google Cloud Computing Foundations - NPTEL (Score: 87/100)",
+    "Google Cloud Computing Foundations - NPTEL Certification, Score: 87/100",
   ],
 };
 
@@ -307,7 +319,7 @@ function renderCertifications() {
   container.innerHTML = years
     .map(
       (year) => `
-      <article class="cert-year">
+      <article class="cert-group">
         <h3>${year}</h3>
         <ul>
           ${certifications[year].map((item) => `<li>${item}</li>`).join("")}
