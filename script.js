@@ -266,14 +266,14 @@ function renderExperience() {
     .map(
       (item, index) => `
       <article class="timeline-card" style="--delay: ${index * 90}ms;">
-        <div class="timeline-top">
+        <p class="timeline-meta">${item.period}</p>
+        <div class="timeline-content">
           <h3>${item.role}</h3>
-          <p class="timeline-meta">${item.period}</p>
+          <p class="timeline-company">${item.company}</p>
+          <ul>
+            ${item.highlights.map((point) => `<li>${point}</li>`).join("")}
+          </ul>
         </div>
-        <p class="timeline-company">${item.company}</p>
-        <ul>
-          ${item.highlights.map((point) => `<li>${point}</li>`).join("")}
-        </ul>
       </article>
     `
     )
@@ -357,7 +357,7 @@ function applyTheme(theme) {
 function getInitialTheme() {
   const stored = localStorage.getItem(themeStorageKey);
   if (stored === "light" || stored === "dark") return stored;
-  return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+  return "light";
 }
 
 function initTheme() {
@@ -372,13 +372,6 @@ function initTheme() {
       applyTheme(next);
     });
   }
-
-  const media = window.matchMedia("(prefers-color-scheme: light)");
-  media.addEventListener("change", (event) => {
-    if (!localStorage.getItem(themeStorageKey)) {
-      applyTheme(event.matches ? "light" : "dark");
-    }
-  });
 }
 
 function initMobileMenu() {
@@ -456,61 +449,6 @@ function initScrollProgress() {
   window.addEventListener("resize", onScroll);
 }
 
-function initCursorSpotlight() {
-  const spotlight = document.querySelector(".cursor-spotlight");
-  if (!spotlight) return;
-  if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-  let targetX = window.innerWidth / 2;
-  let targetY = window.innerHeight / 3;
-  let currentX = targetX;
-  let currentY = targetY;
-  let rafId = null;
-
-  const animate = () => {
-    currentX += (targetX - currentX) * 0.12;
-    currentY += (targetY - currentY) * 0.12;
-    spotlight.style.transform = `translate(${currentX}px, ${currentY}px) translate(-50%, -50%)`;
-
-    if (Math.abs(targetX - currentX) > 0.5 || Math.abs(targetY - currentY) > 0.5) {
-      rafId = window.requestAnimationFrame(animate);
-    } else {
-      rafId = null;
-    }
-  };
-
-  window.addEventListener(
-    "pointermove",
-    (event) => {
-      targetX = event.clientX;
-      targetY = event.clientY;
-      if (!rafId) rafId = window.requestAnimationFrame(animate);
-    },
-    { passive: true }
-  );
-
-  spotlight.style.transform = `translate(${currentX}px, ${currentY}px) translate(-50%, -50%)`;
-}
-
-function initMagneticButtons() {
-  if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-  const buttons = document.querySelectorAll(".btn-primary, .btn-ghost");
-  buttons.forEach((btn) => {
-    btn.addEventListener("pointermove", (event) => {
-      const rect = btn.getBoundingClientRect();
-      const x = event.clientX - rect.left - rect.width / 2;
-      const y = event.clientY - rect.top - rect.height / 2;
-      btn.style.transform = `translate(${x * 0.15}px, ${y * 0.2}px) translateY(-2px)`;
-    });
-    btn.addEventListener("pointerleave", () => {
-      btn.style.transform = "";
-    });
-  });
-}
-
 function initActiveNav() {
   const links = Array.from(document.querySelectorAll(".site-nav a"));
   const sections = links
@@ -559,72 +497,10 @@ function initActiveNav() {
 }
 
 function initCalendly() {
-  const positionClose = () => {
-    const popup = document.querySelector(
-      ".calendly-overlay .calendly-popup-content, .calendly-overlay .calendly-popup"
-    );
-    const close = document.querySelector(".calendly-overlay .calendly-popup-close");
-    if (!popup || !close) return false;
-
-    const rect = popup.getBoundingClientRect();
-    if (rect.width === 0 || rect.height === 0) return false;
-
-    const inset = 14;
-    const closeSize = 30;
-    close.style.top = `${Math.max(12, rect.top + inset)}px`;
-    close.style.right = `${Math.max(12, window.innerWidth - rect.right + inset)}px`;
-    close.style.left = "auto";
-    close.style.bottom = "auto";
-    close.style.width = `${closeSize}px`;
-    close.style.height = `${closeSize}px`;
-    return true;
-  };
-
-  let observer = null;
-  let resizeHandler = null;
-
-  const teardown = () => {
-    if (observer) {
-      observer.disconnect();
-      observer = null;
-    }
-    if (resizeHandler) {
-      window.removeEventListener("resize", resizeHandler);
-      window.removeEventListener("scroll", resizeHandler, true);
-      resizeHandler = null;
-    }
-  };
-
-  const watchOverlay = () => {
-    teardown();
-
-    let attempts = 0;
-    const tryPosition = () => {
-      attempts += 1;
-      if (positionClose()) return;
-      if (attempts < 40) window.requestAnimationFrame(tryPosition);
-    };
-    tryPosition();
-
-    observer = new MutationObserver(() => {
-      if (!document.querySelector(".calendly-overlay")) {
-        teardown();
-        return;
-      }
-      positionClose();
-    });
-    observer.observe(document.body, { childList: true, subtree: true });
-
-    resizeHandler = () => positionClose();
-    window.addEventListener("resize", resizeHandler);
-    window.addEventListener("scroll", resizeHandler, true);
-  };
-
   const openCalendly = (event) => {
     event.preventDefault();
     if (window.Calendly && typeof window.Calendly.initPopupWidget === "function") {
       window.Calendly.initPopupWidget({ url: profile.calendlyUrl });
-      window.requestAnimationFrame(watchOverlay);
     } else {
       window.open(profile.calendlyUrl, "_blank", "noopener,noreferrer");
     }
@@ -647,8 +523,6 @@ function init() {
   initActiveNav();
   initRevealMotion();
   initScrollProgress();
-  initCursorSpotlight();
-  initMagneticButtons();
   initCalendly();
 }
 
