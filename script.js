@@ -5,15 +5,28 @@ const profile = {
   role: "AI Engineer",
   summary:
     "AI Engineer with published IEEE research in explainable AI and experience delivering production-grade systems, with expertise in LLMs and agentic systems, and a strong foundation in machine learning, deep learning, and NLP, with end-to-end delivery experience on Azure cloud platforms. I specialize in deploying and optimizing VLM/LLM workloads across NVIDIA GPU architectures (Turing, Ampere, and newer), and building end-to-end AI pipelines with robust evaluation for quality, latency, and reliability.",
+  calendlyUrl: "https://calendly.com/nehal-panchal/new-meeting",
   highlights: [
     "Published IEEE research in explainable multimodal glaucoma detection (2025).",
     "Strong foundation in machine learning, deep learning, and natural language processing.",
     "Built and optimized enterprise AI pipelines with measurable performance and reliability improvements.",
   ],
   socialLinks: [
-    { label: "E-mail", href: "mailto:panchalnehal17@gmail.com" },
-    { label: "LinkedIn", href: "https://www.linkedin.com/in/nehal-panchal-05901b235/" },
-    { label: "GitHub", href: "https://github.com/Nehal04052" },
+    {
+      label: "E-mail",
+      href: "mailto:panchalnehal17@gmail.com",
+      icon: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>',
+    },
+    {
+      label: "LinkedIn",
+      href: "https://www.linkedin.com/in/nehal-panchal-05901b235/",
+      icon: '<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 .02 5 2.5 2.5 0 0 1-.02-5zM3 9h4v12H3zM9 9h3.8v1.71h.05c.53-.95 1.83-1.96 3.77-1.96 4.03 0 4.77 2.65 4.77 6.1V21h-4v-5.3c0-1.27-.02-2.9-1.77-2.9-1.77 0-2.04 1.38-2.04 2.8V21H9z"/></svg>',
+    },
+    {
+      label: "GitHub",
+      href: "https://github.com/Nehal04052",
+      icon: '<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M12 .5A11.5 11.5 0 0 0 .5 12c0 5.08 3.29 9.39 7.86 10.91.57.11.78-.25.78-.55 0-.27-.01-1-.02-1.95-3.2.69-3.87-1.54-3.87-1.54-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.71 1.26 3.37.96.11-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.73.8 1.18 1.82 1.18 3.08 0 4.41-2.69 5.38-5.26 5.67.41.35.78 1.05.78 2.12 0 1.53-.01 2.76-.01 3.13 0 .3.21.67.79.55A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5z"/></svg>',
+    },
   ],
 };
 
@@ -221,7 +234,8 @@ function renderProfile() {
       .map((link) => {
         const isMailLink = link.href.startsWith("mailto:");
         const externalAttrs = isMailLink ? "" : ' target="_blank" rel="noopener noreferrer"';
-        return `<a class="chip-link" href="${link.href}"${externalAttrs}>${link.label}</a>`;
+        const icon = link.icon ? `<span class="chip-link__icon" aria-hidden="true">${link.icon}</span>` : "";
+        return `<a class="chip-link" href="${link.href}"${externalAttrs}>${icon}<span>${link.label}</span></a>`;
       })
       .join("");
   }
@@ -250,13 +264,13 @@ function renderExperience() {
 
   timeline.innerHTML = experience
     .map(
-      (item) => `
-      <article class="timeline-card">
+      (item, index) => `
+      <article class="timeline-card" style="--delay: ${index * 90}ms;">
         <div class="timeline-top">
           <h3>${item.role}</h3>
           <p class="timeline-meta">${item.period}</p>
         </div>
-        <p class="timeline-meta">${item.company}</p>
+        <p class="timeline-company">${item.company}</p>
         <ul>
           ${item.highlights.map((point) => `<li>${point}</li>`).join("")}
         </ul>
@@ -272,8 +286,8 @@ function renderSkills() {
 
   container.innerHTML = skillGroups
     .map(
-      (group) => `
-      <article class="skill-group">
+      (group, index) => `
+      <article class="skill-group" style="--delay: ${index * 70}ms;">
         <h3>${group.name}</h3>
         <div class="chip-set">
           ${group.items.map((item) => `<span class="chip">${item}</span>`).join("")}
@@ -292,6 +306,7 @@ function renderProjects() {
     .map(
       (project, index) => `
       <article class="project-card" style="--delay: ${index * 80}ms;">
+        <p class="project-number">${String(index + 1).padStart(2, "0")} / ${String(projects.length).padStart(2, "0")}</p>
         <h3>${project.title}</h3>
         <p class="project-stack">${project.stack}</p>
         <p class="project-summary">${project.summary}</p>
@@ -318,8 +333,8 @@ function renderCertifications() {
 
   container.innerHTML = years
     .map(
-      (year) => `
-      <article class="cert-group">
+      (year, index) => `
+      <article class="cert-group" style="--delay: ${index * 80}ms;">
         <h3>${year}</h3>
         <ul>
           ${certifications[year].map((item) => `<li>${item}</li>`).join("")}
@@ -388,7 +403,9 @@ function initMobileMenu() {
 
 function initRevealMotion() {
   const sections = document.querySelectorAll(".reveal");
-  const cards = document.querySelectorAll(".project-card");
+  const cards = document.querySelectorAll(
+    ".project-card, .skill-group, .timeline-card, .cert-group"
+  );
   const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   if (prefersReduced) {
@@ -406,11 +423,92 @@ function initRevealMotion() {
         }
       });
     },
-    { threshold: 0.16, rootMargin: "0px 0px -6% 0px" }
+    { threshold: 0.12, rootMargin: "0px 0px -4% 0px" }
   );
 
   sections.forEach((section) => observer.observe(section));
   cards.forEach((card) => observer.observe(card));
+}
+
+function initScrollProgress() {
+  const bar = document.getElementById("scroll-progress-bar");
+  if (!bar) return;
+
+  let ticking = false;
+  const update = () => {
+    const doc = document.documentElement;
+    const scrollTop = window.scrollY || doc.scrollTop;
+    const max = doc.scrollHeight - window.innerHeight;
+    const pct = max > 0 ? (scrollTop / max) * 100 : 0;
+    bar.style.width = `${Math.min(100, Math.max(0, pct))}%`;
+    ticking = false;
+  };
+
+  const onScroll = () => {
+    if (!ticking) {
+      window.requestAnimationFrame(update);
+      ticking = true;
+    }
+  };
+
+  update();
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll);
+}
+
+function initCursorSpotlight() {
+  const spotlight = document.querySelector(".cursor-spotlight");
+  if (!spotlight) return;
+  if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  let targetX = window.innerWidth / 2;
+  let targetY = window.innerHeight / 3;
+  let currentX = targetX;
+  let currentY = targetY;
+  let rafId = null;
+
+  const animate = () => {
+    currentX += (targetX - currentX) * 0.12;
+    currentY += (targetY - currentY) * 0.12;
+    spotlight.style.transform = `translate(${currentX}px, ${currentY}px) translate(-50%, -50%)`;
+
+    if (Math.abs(targetX - currentX) > 0.5 || Math.abs(targetY - currentY) > 0.5) {
+      rafId = window.requestAnimationFrame(animate);
+    } else {
+      rafId = null;
+    }
+  };
+
+  window.addEventListener(
+    "pointermove",
+    (event) => {
+      targetX = event.clientX;
+      targetY = event.clientY;
+      if (!rafId) rafId = window.requestAnimationFrame(animate);
+    },
+    { passive: true }
+  );
+
+  spotlight.style.transform = `translate(${currentX}px, ${currentY}px) translate(-50%, -50%)`;
+}
+
+function initMagneticButtons() {
+  if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  const buttons = document.querySelectorAll(".btn-primary, .btn-ghost");
+  buttons.forEach((btn) => {
+    btn.addEventListener("pointermove", (event) => {
+      const rect = btn.getBoundingClientRect();
+      const x = event.clientX - rect.left - rect.width / 2;
+      const y = event.clientY - rect.top - rect.height / 2;
+      btn.style.transform = `translate(${x * 0.15}px, ${y * 0.2}px) translateY(-2px)`;
+    });
+    btn.addEventListener("pointerleave", () => {
+      btn.style.transform = "";
+    });
+  });
 }
 
 function initActiveNav() {
@@ -460,6 +558,83 @@ function initActiveNav() {
   window.addEventListener("resize", updateActive);
 }
 
+function initCalendly() {
+  const positionClose = () => {
+    const popup = document.querySelector(
+      ".calendly-overlay .calendly-popup-content, .calendly-overlay .calendly-popup"
+    );
+    const close = document.querySelector(".calendly-overlay .calendly-popup-close");
+    if (!popup || !close) return false;
+
+    const rect = popup.getBoundingClientRect();
+    if (rect.width === 0 || rect.height === 0) return false;
+
+    const inset = 14;
+    const closeSize = 30;
+    close.style.top = `${Math.max(12, rect.top + inset)}px`;
+    close.style.right = `${Math.max(12, window.innerWidth - rect.right + inset)}px`;
+    close.style.left = "auto";
+    close.style.bottom = "auto";
+    close.style.width = `${closeSize}px`;
+    close.style.height = `${closeSize}px`;
+    return true;
+  };
+
+  let observer = null;
+  let resizeHandler = null;
+
+  const teardown = () => {
+    if (observer) {
+      observer.disconnect();
+      observer = null;
+    }
+    if (resizeHandler) {
+      window.removeEventListener("resize", resizeHandler);
+      window.removeEventListener("scroll", resizeHandler, true);
+      resizeHandler = null;
+    }
+  };
+
+  const watchOverlay = () => {
+    teardown();
+
+    let attempts = 0;
+    const tryPosition = () => {
+      attempts += 1;
+      if (positionClose()) return;
+      if (attempts < 40) window.requestAnimationFrame(tryPosition);
+    };
+    tryPosition();
+
+    observer = new MutationObserver(() => {
+      if (!document.querySelector(".calendly-overlay")) {
+        teardown();
+        return;
+      }
+      positionClose();
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    resizeHandler = () => positionClose();
+    window.addEventListener("resize", resizeHandler);
+    window.addEventListener("scroll", resizeHandler, true);
+  };
+
+  const openCalendly = (event) => {
+    event.preventDefault();
+    if (window.Calendly && typeof window.Calendly.initPopupWidget === "function") {
+      window.Calendly.initPopupWidget({ url: profile.calendlyUrl });
+      window.requestAnimationFrame(watchOverlay);
+    } else {
+      window.open(profile.calendlyUrl, "_blank", "noopener,noreferrer");
+    }
+  };
+
+  document.querySelectorAll("[data-calendly]").forEach((el) => {
+    el.addEventListener("click", openCalendly);
+  });
+}
+
 function init() {
   renderProfile();
   renderPublication();
@@ -471,6 +646,10 @@ function init() {
   initMobileMenu();
   initActiveNav();
   initRevealMotion();
+  initScrollProgress();
+  initCursorSpotlight();
+  initMagneticButtons();
+  initCalendly();
 }
 
 document.addEventListener("DOMContentLoaded", init);
