@@ -1,0 +1,288 @@
+%-------------------------
+% Enhanced Resume in LaTeX
+% Author: Nehal Panchal
+%------------------------
+
+\documentclass[letterpaper,11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{fontawesome5}
+\usepackage{multicol}
+\usepackage[dvipsnames]{xcolor}
+\setlength{\multicolsep}{-3.0pt}
+\setlength{\columnsep}{-1pt}
+\input{glyphtounicode}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\setlength{\footskip}{4.08003pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.6in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1.19in}
+\addtolength{\topmargin}{-.7in}
+\addtolength{\textheight}{1.4in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-2pt}\color{Black}\raggedright\large\bfseries
+}{}{0em}{}[\color{Black}\titlerule \vspace{-5pt}]
+
+% Ensure that generate pdf is machine readable/ATS parsable
+\pdfgentounicode=1
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{1.0\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & \textbf{\small #2} \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{1.0\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & \textbf{\small #2}\\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+\renewcommand\labelitemi{$\vcenter{\hbox{\tiny$\bullet$}}$}
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.0in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\begin{center}
+  {\Huge \scshape Nehal Panchal} \\ \vspace{5pt}
+  \small \raisebox{-0.1\height}\faPhone\ +91-8469024347 ~ \href{mailto:panchalnehal17@gmail.com}{\raisebox{-0.2\height}\faEnvelope\  \underline{panchalnehal17@gmail.com}} ~
+  \href{https://www.linkedin.com/in/nehal-panchal-05901b235/}{\raisebox{-0.2\height}\faLinkedin\ \underline{LinkedIn}}  ~
+  \href{https://github.com/Nehal04052}{\raisebox{-0.2\height}\faGithub\ \underline{Github}} ~
+  \href{https://nehal04052.github.io}{\raisebox{-0.2\height}\faGlobe\ \underline{Portfolio}}
+  \vspace{-8pt}
+\end{center}
+
+%-----------PROFESSIONAL SUMMARY-----------
+\section{Professional Summary}
+AI Engineer with published IEEE research in explainable AI and experience delivering production-grade systems. Expertise in Large Language Models and agentic systems, with a strong foundation in machine learning, deep learning, and NLP, and end-to-end delivery experience on Azure cloud platforms. Specialized in deploying and optimizing VLM/LLM workloads across NVIDIA GPU architectures (Turing, Ampere, and newer), and building end-to-end AI pipelines with robust evaluation for quality, latency, and reliability.
+
+%-----------PUBLICATIONS-----------
+\section{Publications}
+\begin{itemize}[leftmargin=0.15in, label={\tiny$\bullet$}]
+  \small{
+\item \textbf{N. Panchal}, A. Vishwakarma, V. Dave, H. Jethani, D. Parashar, and N. B. Bahadure, "Multi-Modal Glaucoma Detection Framework using Explainable AI and LLMs," in \textit{2025 3rd International Conference on Disruptive Technologies (ICDT)}, Greater Noida, India, Mar. 2025, \href{https://ieeexplore.ieee.org/document/10986494}{\underline{doi: 10.1109/ICDT63985.2025.10986494}}.
+  }
+\end{itemize}
+\vspace{-15pt}
+
+%-----------PROFESSIONAL EXPERIENCE-----------
+\section{Professional Experience}
+\resumeSubHeadingListStart
+\resumeSubheading
+{Software Developer}{Mar 2026 - Present}
+{Infodesk}{On-Site}
+\resumeItemListStart
+\resumeItem{Deployed DeepSeek OCR V2 using the vLLM library on GPU infrastructure for document parsing, processing 1,000+ documents per day in production}
+\resumeItem{Engineered cross-architecture GPU compatibility for DeepSeek OCR V2: converted inference pipeline to float16 with xFormers for backward compatibility on Nvidia Turing (T4), and enabled bfloat16 with Flash Attention for forward compatibility on Ampere (A100) and newer architectures}
+\resumeItem{Optimized KV cache utilization and implemented input caching for PDF page-to-image pipelines with pre-tokenized batched image inputs, improving throughput}
+\resumeItem{Deployed Qwen 3.5 27B as a self-hosted general-purpose LLM to reduce dependency on third-party providers, scaled across 4 GPUs using tensor parallelism and data-parallel vision encoding for high-throughput concurrent requests in production}
+\resumeItem{Deployed vLLM server with OpenAI-compatible API enabling integration into existing applications and significantly reducing inference costs}
+\resumeItem{Contributed to the development of the Deep Research feature, enhancing existing Copilot enterprise applications and integrating AI capabilities into existing software infrastructure}
+\resumeItem{Deploying and managing AI solutions on Azure infrastructure, including Azure Container Apps, Azure Functions, and Azure App Service}
+\resumeItemListEnd
+\resumeSubheading
+{Associate Software Developer}{Jul 2025 - Feb 2026}
+{Infodesk}{On-Site}
+\resumeItemListStart
+\resumeItem{Built and scaled a taxonomy classification pipeline, fine-tuning LLMs via the OpenAI API and implementing evaluation frameworks to monitor and maintain classification accuracy in production}
+\resumeItem{Developed a centralized summarization service integrated across multiple applications, with rate limiting and hash-encrypted API key authentication backed by PostgreSQL and Django REST Framework}
+\resumeItem{Designed and maintained enterprise AI solutions using LangChain, OpenAI, and LangGraph covering agentic workflows}
+\resumeItem{Collaborated with cross-functional teams to embed AI capabilities into existing applications}
+\resumeItemListEnd
+\resumeSubheading
+{AI/ML Developer Intern}{Jan 2025 - Jul 2025}
+{Infodesk}{On-Site}
+\resumeItemListStart
+\resumeItem{Gained hands-on experience with LLMs, MCP, agentic AI, multi-agent systems, CI/CD pipelines, SDLC, and core software engineering practices}
+\resumeItem{Optimized AI services to improve system performance and efficiency}
+\resumeItem{Researched and evaluated document extraction libraries, analyzing quality, cost, and performance trade-offs}
+\resumeItem{Developed a scalable document extraction tool using Tesseract for script detection and distributed Apache Tika instances via sidecar containers}
+\resumeItem{Deployed the solution on Azure Container Apps and conducted performance profiling of monolithic vs. distributed architectures}
+\resumeItem{Contributed to feature development and code optimization for an existing enterprise product}
+\resumeItemListEnd
+\resumeSubHeadingListEnd
+\vspace{-12pt}
+
+%-----------EDUCATION-----------
+\section{Education}
+\resumeSubHeadingListStart
+\resumeSubheading
+{GSFC University}{Vadodara, Gujarat}
+{Bachelor of Technology in Computer Science \& Engineering}{2021 - 2025}
+\begin{itemize}[leftmargin=0.15in, label={\tiny$\bullet$}]
+  \item CGPA: 7.91/10.0
+  \item Relevant Coursework: Machine Learning, Deep Learning, Natural Language Processing, Cloud Computing, Big Data Analytics
+\end{itemize}
+\resumeSubheading
+{Shree Gattu Vidyalaya}{Ankleshwar, Gujarat}
+{Senior Secondary (XII) - GSEB | Percentage: 68.92\%}{2021}
+\resumeSubheading
+{Lions School}{Ankleshwar, Gujarat}
+{Secondary (X) - GSEB | Percentage: 73.16\%}{2019}
+\resumeSubHeadingListEnd
+\vspace{-15pt}
+
+%-----------TECHNICAL SKILLS-----------
+\section{Technical Skills}
+\begin{itemize}[leftmargin=0.15in, label={}]
+  \small{\item{
+        \textbf{Specialized:} {Agentic AI, Multi-Agent Systems, Prompt Engineering, Vector Databases, LLM Fine-tuning, Explainable AI, Computer Vision} \\
+        \textbf{AI/ML Frameworks:} {PyTorch, TensorFlow, Scikit-Learn, Transformers, vLLM, LangChain, LangGraph, LangSmith, CrewAI, N8N, LIME} \\
+        \textbf{Programming:} {Python, Java, C, C++, C\#, R, JavaScript, TypeScript, SQL} \\
+        \textbf{Web Development:} {React, Angular, .NET, Node.js, FastAPI, Django, Express.js, Bootstrap, Tailwind CSS} \\
+        \textbf{Cloud \& DevOps:} {Azure, Google Cloud Platform (GCP), Docker, Kubernetes, Git, GitHub, BitBucket, Postman} \\
+        \textbf{Data Engineering:} {PySpark, Databricks, Hadoop, MapReduce, Apache Tika, MongoDB, PostgreSQL, MySQL, Oracle}
+        }}
+\end{itemize}
+\vspace{-15pt}
+
+%-----------KEY PROJECTS-----------
+\section{Featured Projects}
+\vspace{-5pt}
+\resumeSubHeadingListStart
+
+\resumeProjectHeading
+{\textbf{Explainable AI Glaucoma Detection System} $|$ \emph{TensorFlow, Groq, FastAPI, React}}{\href{https://github.com/Nehal04052/Explainable-AI-based-Glaucoma-Detection-using-Transfer-Learning-LIME-and-LLMs}{\underline{GitHub}}}
+\resumeItemListStart
+\resumeItem{Architected multi-modal framework combining VGG16 CNN with LLAMA 3.2 90B Vision and 3.1 70B models}
+\resumeItem{Achieved 96\% accuracy in glaucoma detection while providing interpretable visual explanations using LIME}
+\resumeItem{Built responsive React frontend and FastAPI/Express.js backend with MongoDB for scalable deployment}
+\resumeItem{Enhanced medical transparency by generating both visual and textual explanations for predictions}
+\resumeItemListEnd
+
+\resumeProjectHeading
+{\textbf{StockSense - Agentic AI Tutoring Platform} $|$ \emph{LangGraph, LangChain, Django, React, PostgreSQL}}{\href{https://stocksense-production.onrender.com}{\underline{Live Demo}}}
+\resumeItemListStart
+\resumeItem{Developed an agent-based intelligent tutoring system leveraging open-source models with Groq}
+\resumeItem{Integrated multiple tools including: live stock rate fetcher using yfinance, knowledge retrieval tool for stock market concepts from reputed sources like Zerodha, and search tool for up-to-date stock market news}
+\resumeItem{Built data ingestion pipeline processing PDFs and scraped website data with semantic chunking powered by Voyage Finance embedding model}
+\resumeItem{Implemented Pinecone vector database pipeline to store and index semantic chunks, enabling efficient retrieval and contextual search}
+\resumeItem{Implemented JWT authentication and custom user model extending Django's AbstractUser for personalized experiences}
+\resumeItem{Optimized database performance using Psycopg 3 with connection pooling for high-concurrency scenarios}
+\resumeItem{Deployed full-stack solution with CORS-enabled API and dynamic React-based chat interface}
+\resumeItemListEnd
+
+\resumeProjectHeading
+{\textbf{Automated Cold Email Generator} $|$ \emph{LangChain, Groq, Streamlit}}{\href{https://github.com/Nehal04052/Cold-Email-Generator}{\underline{GitHub}}}
+\resumeItemListStart
+\resumeItem{Built automated outreach tool generating personalized emails}
+\resumeItem{Integrated web scraping for job listings and vector database for dynamic portfolio matching}
+\resumeItem{Streamlined business development process for service companies targeting specific job requirements}
+\resumeItemListEnd
+
+\resumeProjectHeading
+{\textbf{Real-time Sentiment Analysis System} $|$ \emph{LSTM, TensorFlow, Flask, Pandas}}{\href{https://github.com/Nehal04052/Customer-Feedback-Sentiment-Analysis-using-LSTM}{\underline{GitHub}}}
+\resumeItemListStart
+\resumeItem{Trained LSTM RNN model on Twitter US Airline Sentiment Dataset achieving 89\% accuracy}
+\resumeItem{Deployed Flask web application with real-time inference for customer review classification}
+\resumeItem{Preprocessed textual data using Pandas for structured input and improved model performance}
+\resumeItemListEnd
+
+\resumeProjectHeading
+{\textbf{Predictive Modeling with PySpark MLlib} $|$ \emph{PySpark, Databricks, MLlib}}{\href{https://github.com/Nehal04052/Big-Data-and-Cloud-Computing}{\underline{GitHub}}}
+\resumeItemListStart
+\resumeItem{Developed ML models for admission prediction, sales forecasting, and cancer detection using distributed computing}
+\resumeItem{Implemented Linear/Logistic Regression and Random Forest algorithms with RMSE and ROC-AUC evaluation}
+\resumeItem{Processed large-scale datasets efficiently using PySpark's distributed computing capabilities}
+\resumeItemListEnd
+
+\newpage
+
+\resumeProjectHeading
+{\textbf{URL Shortener with Open Source Contributions} $|$ \emph{Node.js, Firebase, JavaScript}}{\href{https://github.com/Nehal04052/URL-Shortener}{\underline{GitHub}}}
+\resumeItemListStart
+\resumeItem{Developed URL shortening service converting long URLs to 4-character codes with real-time Firebase storage}
+\resumeItem{Contributed features and bug fixes to open source project, improving error handling and validation}
+\resumeItemListEnd
+
+\resumeProjectHeading
+{\textbf{Flight Management System} $|$ \emph{MERN Stack, MySQL, REST APIs}}{\href{https://github.com/Nehal04052/airline-reservation-system}{\underline{GitHub}}}
+\resumeItemListStart
+\resumeItem{Led end-to-end implementation including database design, authentication, and RESTful API development}
+\resumeItem{Built comprehensive flight booking system with real-time availability and reservation management}
+\resumeItemListEnd
+
+\resumeProjectHeading
+{\textbf{Hospital Management System} $|$ \emph{Python, Tkinter, MySQL}}{\href{https://github.com/Nehal04052/Hospital_Management_System}{\underline{GitHub}}}
+\resumeItemListStart
+\resumeItem{Developed desktop application streamlining patient registration, medical records, and billing operations}
+\resumeItem{Implemented efficient database schema for managing complex healthcare data relationships}
+\resumeItemListEnd
+
+\resumeSubHeadingListEnd
+\vspace{-15pt}
+
+%-----------CERTIFICATIONS-----------
+\section{Certifications}
+\begin{itemize}[leftmargin=0.15in, label={\tiny$\bullet$}]
+  \small{
+  \item \textbf{Claude 101} - Anthropic (2026)
+  \item \textbf{Microsoft AI Skill Challenge} - Microsoft (2024)
+  \item \textbf{Azure AI Services Suite} - Natural Language Processing, Document Intelligence, Computer Vision (2024)
+  \item \textbf{Google Analytics for Beginners} - Google Analytics Academy (2024)
+  \item \textbf{IBM Enterprise-grade AI} - Getting Started with Enterprise AI (2024)
+  \item \textbf{IBM Enterprise Data Science} - Professional Certification (2023)
+  \item \textbf{Google Cloud Computing Foundations} - NPTEL Certification, Score: 87/100 (2023)
+  }
+\end{itemize}
+\vspace{-15pt}
+
+%-----------ADDITIONAL-----------
+\section{Additional Information}
+\begin{itemize}[leftmargin=0.15in, label={\tiny$\bullet$}]
+  \small{
+  \item \textbf{Languages:} English (Fluent), Hindi (Fluent), Gujarati (Native)
+  \item \textbf{Soft Skills:} Team Leadership, Problem-solving, Critical Thinking, Adaptability, Proactive Initiative
+  \item \textbf{Interests:} AI/ML Research, Open Source Contributing, Building Personal Projects
+  \item \textbf{Location:} Ankleshwar, Gujarat, India
+  }
+\end{itemize}
+
+\end{document}
