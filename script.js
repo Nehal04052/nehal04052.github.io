@@ -460,6 +460,69 @@ function initActiveNav() {
   window.addEventListener("resize", updateActive);
 }
 
+function initContactForm() {
+  const form = document.getElementById("contact-form");
+  const status = document.getElementById("form-status");
+  if (!form || !status) return;
+
+  const setStatus = (message, variant) => {
+    status.textContent = message;
+    status.classList.remove("is-success", "is-error");
+    if (variant) status.classList.add(variant);
+  };
+
+  const params = new URLSearchParams(window.location.search);
+  if (params.get("sent") === "1") {
+    setStatus("Thanks — your message has been sent. I'll be in touch soon.", "is-success");
+  }
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const submitBtn = form.querySelector("button[type='submit']");
+    const formData = new FormData(form);
+
+    const honeypot = formData.get("bot-field");
+    if (typeof honeypot === "string" && honeypot.trim() !== "") {
+      setStatus("Thanks — your message has been sent.", "is-success");
+      form.reset();
+      return;
+    }
+
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.dataset.originalLabel = submitBtn.querySelector("span")?.textContent || "";
+      const label = submitBtn.querySelector("span");
+      if (label) label.textContent = "Sending...";
+    }
+    setStatus("Sending your message...");
+
+    try {
+      const response = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(formData).toString(),
+      });
+
+      if (!response.ok) throw new Error(`Request failed with status ${response.status}`);
+
+      form.reset();
+      setStatus("Thanks — your message has been sent. I'll be in touch soon.", "is-success");
+    } catch (error) {
+      console.error("Form submission failed", error);
+      setStatus("Something went wrong. Please try again or email me directly.", "is-error");
+    } finally {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        const label = submitBtn.querySelector("span");
+        if (label && submitBtn.dataset.originalLabel) {
+          label.textContent = submitBtn.dataset.originalLabel;
+        }
+      }
+    }
+  });
+}
+
 function init() {
   renderProfile();
   renderPublication();
@@ -471,6 +534,7 @@ function init() {
   initMobileMenu();
   initActiveNav();
   initRevealMotion();
+  initContactForm();
 }
 
 document.addEventListener("DOMContentLoaded", init);
