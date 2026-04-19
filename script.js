@@ -67,7 +67,7 @@ const experience = [
     company: "Infodesk",
     period: "Jan 2025 - Jul 2025",
     highlights: [
-      "Gained hands-on experience with LLMs, RAG, MCP, multi-agent systems, CI/CD pipelines, SDLC, and core software engineering practices.",
+      "Gained hands-on experience with LLMs, MCP, agentic AI, multi-agent systems, CI/CD pipelines, SDLC, and core software engineering practices.",
       "Optimized AI services to improve system performance and efficiency.",
       "Researched and evaluated document extraction libraries, analyzing quality, cost, and performance trade-offs.",
       "Developed a scalable document extraction tool using Tesseract for script detection and distributed Apache Tika instances via sidecar containers.",
@@ -78,6 +78,18 @@ const experience = [
 ];
 
 const skillGroups = [
+  {
+    name: "Specialized",
+    items: [
+      "Agentic AI",
+      "Multi-Agent Systems",
+      "Prompt Engineering",
+      "Vector Databases",
+      "LLM Fine-tuning",
+      "Explainable AI",
+      "Computer Vision",
+    ],
+  },
   {
     name: "AI/ML Frameworks",
     items: [
@@ -130,17 +142,6 @@ const skillGroups = [
       "Oracle",
     ],
   },
-  {
-    name: "Specialized",
-    items: [
-      "RAG Systems",
-      "Prompt Engineering",
-      "Vector Databases",
-      "LLM Fine-tuning",
-      "Explainable AI",
-      "Computer Vision",
-    ],
-  },
 ];
 
 const projects = [
@@ -158,7 +159,7 @@ const projects = [
     ],
   },
   {
-    title: "StockSense - Agentic RAG Tutoring Platform",
+    title: "StockSense - Agentic AI Tutoring Platform",
     stack: "LangGraph, LangChain, Django, React, PostgreSQL",
     summary:
       "Built an agent-based tutoring system with retrieval pipelines, tool orchestration, and personalized auth-backed experience.",
