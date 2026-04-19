@@ -297,6 +297,7 @@ em {
   position: relative;
   font-family: var(--font-display);
   font-weight: 500;
+  font-style: italic;
   font-size: 1.05rem;
   letter-spacing: -0.03em;
   text-decoration: none;
@@ -304,21 +305,15 @@ em {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.2rem 0;
-  transition: opacity var(--transition);
-}
-
-.brand::before {
-  content: "";
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-soft);
+  padding: 0.3rem 0.7rem;
+  border: 1px solid rgba(180, 144, 92, 0.45);
+  border-radius: var(--radius-xs);
+  transition: border-color var(--transition), opacity var(--transition);
 }
 
 .brand:hover {
-  opacity: 0.75;
+  border-color: rgba(180, 144, 92, 0.75);
+  opacity: 0.9;
 }
 
 .menu-toggle {
